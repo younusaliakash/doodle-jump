@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    //create platform functionality
     function createPlatform() {
         for (let i = 0; i < platformCount; i++) {
             let platGap = 600 / platformCount;
@@ -33,13 +34,35 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    createPlatform()
+    //move platform 
+    function movePlatforms() {
+        if (doodlerBottomSpace > 100) {
+            platForms.forEach(platform => {
+                platform.bottom -= 4
+                let visual = platform.visual
+                visual.style.bottom = platform.bottom + 'px'
+            })
+        }
+    }
+
 
     function createDoodler() {
         grid.appendChild(doodler);
         doodler.classList.add("doodler")
+        doodlerLeftSpace = platForms[0].left
+        doodler.style.left = doodlerLeftSpace + "px"
         doodler.style.bottom = doodlerBottomSpace + "px"
-
     }
-    createDoodler();
+
+
+    function start() {
+        if (!isGameOver) {
+            createPlatform()
+            createDoodler();
+            setInterval(movePlatforms, 30);
+        }
+    }
+
+    start()
+
 })
