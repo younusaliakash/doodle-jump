@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let doodlerLeftSpace = 50;
     let doodlerBottomSpace = 150;
     let platForms = []
+    let score = 0;
 
     class Platform {
         constructor(newPlatBottom) {
@@ -41,6 +42,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 platform.bottom -= 4
                 let visual = platform.visual
                 visual.style.bottom = platform.bottom + 'px'
+
+                if (platform.bottom < 10) {
+                    let firstPlatform = platForms[0].visual
+                    firstPlatform.classList.remove('platform');
+                    platForms.shift()
+                    console.log(platForms)
+
+                    score++
+
+                    let newPlatform = new Platform(600)
+                    platForms.push(newPlatform)
+                    console.log(platForms)
+                }
             })
         }
     }
