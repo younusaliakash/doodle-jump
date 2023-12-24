@@ -1,1 +1,1 @@
-# doodle-jump
+# Doodle Jump
